@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillguard"
+version = "0.1.0"
+description = "Static security scanner for AI agent skills and plugins (SKILL.md, CLAUDE.md, hooks, scripts)."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+keywords = ["security", "ai-agents", "claude", "mcp", "skills", "prompt-injection", "supply-chain"]
+authors = [{ name = "SkillGuard contributors" }]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+]
+dependencies = []  # zero runtime dependencies — pure standard library
+
+[project.scripts]
+skillguard = "skillguard.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/skillguard/skillguard"
+Issues = "https://github.com/skillguard/skillguard/issues"
+
+[tool.setuptools]
+packages = ["skillguard"]
