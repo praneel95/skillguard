@@ -1,0 +1,5 @@
+# SkillGuard's own detection strings live in these files by design.
+tests/
+examples/malicious-skill/
+README.md
+skillguard/rules.py
