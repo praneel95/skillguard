@@ -61,7 +61,7 @@ Every markdown/instruction file and script in the target: `SKILL.md`, `CLAUDE.md
 | SG006 | high | secret | Hardcoded API keys, tokens, private keys |
 | SG007 | medium | suspicious-network | Raw IPs, high-risk TLDs, URL shorteners |
 
-## Use in CI (GitHub Actions)
+## Use as a GitHub Action
 
 ```yaml
 name: skill-security
@@ -71,13 +71,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: "3.x" }
-      - run: python -m skillguard scan . --fail-on high --format sarif -o skillguard.sarif
+      - uses: praneel95/skillguard@v0.1.0
+        with:
+          path: .
+          fail-on: high
+          format: sarif
+          output: skillguard.sarif
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with: { sarif_file: skillguard.sarif }
 ```
+
+Or call the module directly without the Action:
+
+```yaml
+      - run: python -m skillguard scan . --fail-on high
+```
+
+## Use as a pre-commit hook
+
+Add to your `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/praneel95/skillguard
+    rev: v0.1.0
+    hooks:
+      - id: skillguard
+```
+
+Then `pre-commit install`. SkillGuard now scans on every commit and blocks
+anything at `high` severity or above.
 
 ## How it's built
 

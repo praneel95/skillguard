@@ -1,0 +1,8 @@
+- id: skillguard
+  name: SkillGuard (scan AI agent skills)
+  description: Static security scan of SKILL.md / CLAUDE.md / hooks / scripts for prompt injection, hidden Unicode, exfiltration, and dangerous commands.
+  entry: skillguard scan
+  language: python
+  pass_filenames: false
+  args: ["--fail-on", "high", "."]
+  always_run: true
